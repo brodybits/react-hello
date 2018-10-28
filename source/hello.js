@@ -18,25 +18,31 @@ const helloFactory = function ({ React }) {
       })
     };
 
-    return {
+    const wordInput = React.createRef();
+
+    // TODO: define this as a const and then do return self
+    // at the end.
+    let self;
+
+    return self = {
 
       props, // set props
 
 
       componentDidUpdate () {
-        this.refs.wordInput.getDOMNode().focus();
+        wordInput.getDOMNode().focus();
       },
 
       render () {
         const {
           word,
           mode
-        } = this.props;
+        } = self.props;
 
         const {
           setMode,
           setWord
-        } = this.props.actions;
+        } = self.props.actions;
 
         const styles = {
           displayMode: {
@@ -62,7 +68,7 @@ const helloFactory = function ({ React }) {
               onClick = { () => setMode('edit') }
               >{ word }!</span>
             <input
-              ref = "wordInput"
+              ref = {wordInput}
               style = { styles.editMode }
               placeholder = { word }
               onKeyUp = { onKeyUp } />
